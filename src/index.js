@@ -1,42 +1,15 @@
-import Pokedex from 'pokedex-promise-v2';
-const P = new Pokedex();
+import Arena from './arena';
+import Card from './card';
+import Chest from './chest'
+import Player from './player';
 
+export default (baseUri = 'http://www.clashapi.xyz') => {
 
-export default {
+  return {
+    arenas: new Arena(baseUri),
+    cards: new Card(baseUri),
+    chests: new Chest(baseUri),
+    players: new Player(baseUri)
+  }
 
-  pokemon: {
-
-    /**
-     * Retrieves all the pokemon with their name, and id
-     *
-     * @public
-     *
-     * @returns {Promise.<{name, id}>}
-     */
-    async allNames() {
-      const { results } = await P.getPokemonsList();
-
-      return results.map(({ name, url }) => {
-        const parts = [... new Set(url.split('/'))];
-        return {
-          name,
-          id: parts[parts.length - 1]
-        }
-      });
-    },
-
-    /**
-     * Finds a pokemon by id or name
-     *
-     * @public
-     *
-     * @param {String} idOrName - an id or name
-     * @returns {Promise.<*>}
-     */
-    async find(idOrName = '') {
-      return await P.getPokemonByName(idOrName);
-    }
-  },
-
-  items: {}
 }
