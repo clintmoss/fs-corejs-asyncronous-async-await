@@ -28,31 +28,50 @@ I like the pattern because it turns asynchronous code into code that appears syn
 
 ## Assignment
 
+For this assignment we will be creating a client for the [Clash Royal API](https://github.com/martincarrera/clash-royale-api).  Use any library to do requests from an api: `request`, `node-fetch`, `wreck`, etc.  
+     
+All functions must use the `async/await` pattern.  To reduce code duplication, you may want to create supporting files.
 
-https://github.com/martincarrera/clash-royale-api
+---
 
-
-
-> Using the [Pokemon API](https://pokeapi.co/docsv2/#) once again and the library `pokedex-promise-v2`
-
-1. Create an abject literal that contains two properties: pokemon, items.  Export this object literal as the default.
+1. Use a library like `https://www.npmjs.com/package/node-fetch` to retrieve data from a remote api.
+2. Create an `arena` file that exports a default class.
+    1. Create a function named `async all()`.  The function should retrieve data from `http://www.clashapi.xyz/api/arenas`.  The function should return an array of arenas
+        1. Ensure the call is 200
+        2. Throw an error when the status is not 200, with appropriate data. The function should retrieve data from `http://www.clashapi.xyz/api/arenas/{id}`. The function should return an object.
+    2. Create a function named `async find(id)`. 
+      ```js
+      export class default {
+             
+        async all() {
+          // Code
+        }
+        
+        async find(id) {
+          // Code
+        }
+      }
+      ```
+3. Repeat #2 and all sub-steps for the card api `http://www.clashapi.xyz/api/cards`
+4. Repeat #2 and all sub-steps for the chests api `http://www.clashapi.xyz/api/chests`
+5. Repeat #2 and all sub-steps for the players api `http://www.clashapi.xyz/api/players`
+6. Create an `index.js` file that exports out a default function.  The function's parameters should take a baseUri that is defaulted to `http://www.clashapi.xyz`.  The function should return an object literal that contains the following properties: `arenas`, `cards`, `chests`, and `players`.  Use the appropriate files to assign the properties.
 
 ```js
-export default { 
-  pokemon: {}, 
-  items: {} 
-};
+export default (baseUri) => {
+
+  return {
+    areanas: new Arena(baseUri),
+    cards: new Card(baseUri)
+    
+    // More...
+  };
+  
+}
+
 ```
 
-Within the `pokemon: {}` property: 
 
-1. Create a function `allNames()`.  Use the `async` keyword to retrieve all the names.  The return value should be an array of pokemon's name, and their id's: `[ { name, id }]` (You'll need to strip the id out of the url field)
-4. Create a function `find(idOrName)`. Use the `async` keyword to retrieve a pokemon by its `name` or `id`.  The function should return back an object that contains a pokemon.
-
-Within the `items: {}` property:
-
-1. Create a function `all()`.  Use the `async` keyword to retrieve all the items from the api. The functions should return `[{ name, id}]`. You will also need to pull out the id out of the url.  (Make sure your not duplicating code)
-2. Create a function `find(idOrName)`. Use the `async` keyword to retrieve an item by its `name` or `id`.  The function should return an object that contains an item.
 
 
 ### Resources
