@@ -2,6 +2,8 @@
 
 > Using the async/await pattern to control parallelism
 
+[![Build Status](https://travis-ci.org/helio-training/fs-corejs-asyncronous-async-await.svg?branch=solutions)](https://travis-ci.org/helio-training/fs-corejs-asyncronous-async-await)
+
 ## Introduction
 
 The last evolution of the asynchronous code is to use the async/await pattern.  By decorating a function with the `async` keyword we are effectively telling JavaScript that our function in simplistic terms will return a promise.  To use the `async` keyword simply place it before the function definition.
